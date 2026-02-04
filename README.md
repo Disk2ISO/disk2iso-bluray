@@ -108,14 +108,14 @@ sudo /opt/disk2iso/lib/libbluray.sh
 
 ### Via Web-UI
 
-1. Öffne http://your-server:5000
+1. Öffne <http://your-server:5000>
 2. Lege Blu-ray ein
 3. Klicke auf **Kopieren starten**
 4. Verfolge Fortschritt in Echtzeit
 
 ## 📊 Ausgabe-Struktur
 
-```
+```text
 /media/iso/bd/
 ├── Movie_Title_2024.iso              # ISO-Image (verschlüsselt)
 ├── Movie_Title_2024.iso.log          # Kopiervorgang-Log
@@ -168,7 +168,7 @@ curl http://localhost:5000/api/status
 
 ### Struktur
 
-```
+```text
 disk2iso-bluray/
 ├── conf/
 │   └── libbluray.ini           # Modul-Manifest
