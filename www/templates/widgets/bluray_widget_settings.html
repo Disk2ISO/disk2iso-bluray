@@ -1,0 +1,21 @@
+<!-- Blu-ray Widget Settings -->
+<!-- Dynamisch geladen via bluray_widget_settings.js -->
+<div class="form-section" id="bluray-widget-settings">
+    <h2>
+        <img src="{{ url_for('static', filename='img/bluray.svg') }}" alt="" style="width:24px;height:24px;vertical-align:middle;margin-right:8px;">
+        Blu-ray Modul
+    </h2>
+    
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="bluray_active" name="bluray_active" {{ 'checked' if config.active else '' }}>
+            Blu-ray Support aktivieren
+        </label>
+        <div class="help-text">
+            Aktiviert das Erstellen von ISO-Images von Blu-ray Discs (verschlüsselt mit ddrescue oder dd).
+            {% if not config.enabled %}
+            <br><strong style="color: #f56565;">⚠ Modul nicht vollständig konfiguriert (enabled=false)</strong>
+            {% endif %}
+        </div>
+    </div>
+</div>
