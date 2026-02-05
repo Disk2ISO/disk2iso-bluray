@@ -160,7 +160,7 @@ copy_bluray_ddrescue() {
     # Prüfe Speicherplatz (Overhead wird automatisch berechnet)
     if [[ $total_bytes -gt 0 ]]; then
         local size_mb=$((total_bytes / 1024 / 1024))
-        if ! check_disk_space "$size_mb"; then
+        if ! systeminfo_check_disk_space "$size_mb"; then
             # Mapfile wird mit temp_pathname automatisch gelöscht
             return 1
         fi
@@ -280,4 +280,59 @@ copy_bluray_ddrescue() {
         finish_copy_log
         return 1
     fi
+}
+# ============================================================================
+# SOFTWARE INFORMATION (für Widgets)
+# ============================================================================
+
+# ===========================================================================
+# bluray_collect_software_info
+# ---------------------------------------------------------------------------
+# Funktion.: Sammle Blu-ray-Modul Software-Informationen
+# Parameter: keine
+# Rückgabe.: 0 = Erfolg, 1 = Fehler
+# Schreibt.: api/bluray_software_info.json
+# Hinweis..: Liest Dependencies aus libbluray.ini und nutzt zentrale Prüfung
+# ===========================================================================
+bluray_collect_software_info() {
+    local api_dir=$(folders_get_api_dir) || return 1
+    
+    # Lese optionale Dependencies aus INI (external ist leer)
+    local optional_deps=$(config_get_value_ini "bluray" "dependencies" "optional")
+    # Format: "ddrescue"
+    
+    # Konvertiere zu Array
+    IFS=',' read -ra dep_array <<< "$optional_deps"
+    
+    # Rufe zentrale Prüffunktion auf (aus libsysteminfo.sh)
+    local software_json=$(systeminfo_check_software_list "${dep_array[@]}")
+    
+    # Schreibe in Modul-spezifisches JSON
+    echo "$software_json" > "${api_dir}/bluray_software_info.json"
+    
+    return 0
+}
+
+# ===========================================================================
+# bluray_get_software_info
+# ---------------------------------------------------------------------------
+# Funktion.: Lese Blu-ray-Software-Informationen für Widget
+# Parameter: keine
+# Rückgabe.: 0 = Erfolg, 1 = Fehler
+# Ausgabe..: JSON-Array (stdout)
+# Für.....: bluray_widget_4x1_dependencies
+# Nutzung..: Wird von /api/modules/bluray/software aufgerufen
+# ===========================================================================
+bluray_get_software_info() {
+    local api_dir=$(folders_get_api_dir) || return 1
+    local json_file="${api_dir}/bluray_software_info.json"
+    
+    # Fallback: Sammle Daten wenn JSON nicht existiert
+    if [[ ! -f "$json_file" ]]; then
+        bluray_collect_software_info || return 1
+    fi
+    
+    # Gib JSON aus
+    cat "$json_file"
+    return 0
 }
