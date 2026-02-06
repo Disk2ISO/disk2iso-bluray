@@ -81,8 +81,8 @@ def api_bluray_settings_widget():
     """
     config = get_bluray_settings()
     
-    return render_template('widgets/bluray_widget_settings.html',
-                         settings=settings,
+    return render_template('widgets/settings_4x1_bluray.html',
+                         settings=config,
                          t=t)
 
 @bluray_settings_bp.route('/api/widgets/bluray/settings', methods=['POST'])

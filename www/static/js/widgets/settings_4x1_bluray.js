@@ -1,5 +1,5 @@
 /**
- * disk2iso - Blu-ray Settings Widget
+ * disk2iso - Settings Widget (4x1) - Bluray
  * Lädt Blu-ray Einstellungen dynamisch
  */
 

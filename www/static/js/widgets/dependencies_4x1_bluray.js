@@ -1,11 +1,11 @@
 /**
- * Bluray Module - Dependencies Widget (4x1)
+ * Dependencies Widget (4x1) - Bluray
  * Zeigt Blu-ray spezifische Tools
  * Version: 1.0.0
  */
 
 function loadBlurayDependencies() {
-    fetch('/api/system')
+    fetch('/api/widgets/bluray/dependencies')
         .then(response => response.json())
         .then(data => {
             if (data.success && data.software) {
