@@ -1,0 +1,62 @@
+{
+  "id": "bluray",
+  "name": "Blu-ray Modul",
+  "category": "optional",
+  "description": "Backup von Blu-ray Discs mit TMDB-Metadaten und Cover-Art",
+  "icon": "https://raw.githubusercontent.com/Disk2ISO/disk2iso-bluray/main/store/icon.svg",
+  "author": "Disk2ISO Team",
+  "homepage": "https://github.com/Disk2ISO/disk2iso-bluray",
+  "repository": "https://github.com/Disk2ISO/disk2iso-bluray",
+  "license": "MIT",
+  "requires": {
+    "disk2iso": ">=1.3.0"
+  },
+  "recommends": {
+    "metadata": ">=1.3.0",
+    "tmdb": ">=1.3.0"
+  },
+  "current_version": "1.3.0",
+  "versions": [
+    {
+      "version": "1.3.0",
+      "released": "2026-02-07",
+      "changelog": "Kompatibilität mit disk2iso 1.3.0 Service-Struktur",
+      "download_url": "https://github.com/Disk2ISO/disk2iso-bluray/releases/download/v1.3.0/bluray-module.zip",
+      "checksum_url": "https://github.com/Disk2ISO/disk2iso-bluray/releases/download/v1.3.0/bluray-module.zip.sha256",
+      "size": "TBD"
+    },
+    {
+      "version": "1.2.0",
+      "released": "2026-02-04",
+      "changelog": "Initiales Release als eigenständiges Modul",
+      "download_url": "https://github.com/Disk2ISO/disk2iso-bluray/releases/download/v1.2.0/bluray-module.zip",
+      "checksum_url": "https://github.com/Disk2ISO/disk2iso-bluray/releases/download/v1.2.0/bluray-module.zip.sha256",
+      "size": "TBD"
+    }
+  ],
+  "install_method": "unzip",
+  "install_path": "/opt/disk2iso/",
+  "post_install": [
+    "sudo systemctl restart disk2iso-web"
+  ],
+  "features": [
+    "ddrescue für robustes Kopieren",
+    "dd für direkte ISO-Erstellung",
+    "TMDB Metadaten-Integration",
+    "Cover-Art Download",
+    "Automatische Medium-Erkennung",
+    "Multi-Language Support"
+  ],
+  "dependencies": {
+    "system": [
+      "ddrescue",
+      "genisoimage"
+    ]
+  },
+  "planned_features": [
+    "MakeMKV Integration für Entschlüsselung",
+    "Automatische Chapter-Erkennung",
+    "Multi-Angle Support",
+    "3D Blu-ray Unterstützung"
+  ]
+}
