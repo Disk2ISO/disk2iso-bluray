@@ -257,7 +257,7 @@ copy_bluray_ddrescue() {
     done
     
     # Warte auf ddrescue Prozess-Ende (blockiert bis ddrescue fertig ist)
-    # WICHTIG: Kein is_disc_inserted() Check während ddrescue läuft!
+    # WICHTIG: Kein drivestat_disc_insert() Check während ddrescue läuft!
     wait "$ddrescue_pid"
     local ddrescue_exit=$?
     
